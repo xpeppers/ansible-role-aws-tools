@@ -1,0 +1,17 @@
+---
+
+- name: Install prerequisites for codedeploy agent
+  apt: name={{item}} state=latest
+  with_items:
+    - python-pip
+    - ruby
+  when: ansible_os_family == "Debian"
+
+- name: Download installer
+  get_url: url=https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install dest=/tmp/install-codedeploy-agent mode=o+x
+
+- name: Execute installer
+  command: /tmp/install-codedeploy-agent auto
+
+- name: Start daemon
+  systemd: daemon_reload=yes state=started name=codedeploy-agent enabled=yes

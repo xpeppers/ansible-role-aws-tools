@@ -1,0 +1,5 @@
+---
+
+- name: Install from apt when debian based
+  apt: name=awscli state=latest
+  when: ansible_os_family == "Debian"

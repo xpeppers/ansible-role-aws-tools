@@ -1,0 +1,17 @@
+---
+
+- name: Download agent
+  get_url: url=https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py dest=/tmp
+
+- name: Get AWS region
+  command: curl http://169.254.169.254/latest/meta-data/placement/availability-zone
+  register: aws_region
+
+- name: Create directory for config
+  file: path=/var/awslogs/etc state=directory
+
+- name: Create aws logs agent config
+  template: src=templates/aws-logs-agent.conf.j2 dest=/var/awslogs/etc/aws.conf
+
+- name: Execute installer
+  command: python /tmp/awslogs-agent-setup.py --non-interactive -c /var/awslogs/etc/aws.conf --region={{ aws_region.stdout[:-1] }}
