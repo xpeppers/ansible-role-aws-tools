@@ -1,6 +1,6 @@
-# roles/ROLENAME/tasks/main.yml
 ---
 
+- include: requirements.yaml
 - include: awscli.yaml
 - include: aws-cloudwatch-logs-agent.yaml
 - include: awscli-monitor-scripts.yaml

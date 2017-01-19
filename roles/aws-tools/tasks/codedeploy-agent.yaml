@@ -1,0 +1,28 @@
+---
+# http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-run-agent-install.html
+- name: Install prerequisites for codedeploy agent
+  apt: name={{item}} tate=latest
+  with_items:
+    - ruby
+    - wget
+  when: ansible_os_family == "Debian"
+
+- name: Install from yum when Red Hat based
+  yum: name={{item}} state=latest
+  with_items:
+    - ruby
+    - wget
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'Amazon'
+
+# On eu-west-1
+- name: Download installer
+  get_url: url=https://aws-codedeploy-eu-west-1.s3.amazonaws.com/latest/install dest=/tmp/install-codedeploy-agent mode=o+x
+
+- name: Execute installer
+  command: /tmp/install-codedeploy-agent auto
+
+- name: Start daemon
+  service:
+    name: codedeploy-agent
+    state: restarted
+    enabled: yes

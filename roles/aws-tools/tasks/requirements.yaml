@@ -1,0 +1,13 @@
+---
+
+- name: Install prerequisites from apt when Debian based
+  apt: name=python-pip state=latest
+  when: ansible_os_family == "Debian"
+
+# Not required on Amazon Linux AMIs
+- name: Install from yum when Red Hat based
+  yum: name={{item}} state=latest
+  with_items:
+    - epel-release
+    - python-pip
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'

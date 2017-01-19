@@ -1,0 +1,8 @@
+---
+- name: Install ansible-role-aws-cli
+  hosts: centos
+  remote_user: centos
+  become: yes
+  become_method: sudo
+  roles:
+    - role: aws-tools

@@ -1,0 +1,9 @@
+# Ansible hosts, with optional [groups]
+[centos]
+<insert IP> ansible_ssh_private_key_file=<your-key-if-required>
+
+[amazonlinux]
+<insert IP> ansible_ssh_private_key_file=<your-key-if-required>
+
+[ubuntu]
+<insert IP> ansible_ssh_private_key_file=<your-key-if-required>
