@@ -1,7 +1,7 @@
 ---
 # http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-run-agent-install.html
 - name: Install prerequisites for codedeploy agent
-  apt: name={{item}} tate=latest
+  apt: name={{item}} state=latest
   with_items:
     - ruby
     - wget
