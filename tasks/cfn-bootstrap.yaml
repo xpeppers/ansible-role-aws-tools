@@ -7,7 +7,7 @@
   file: state=directory path=/tmp/aws-cfn-bootstrap
 
 - name: Unarchive cfn-bootstrap archive
-  command: gtar xvf /tmp/aws-cfn-bootstrap-latest.tar.gz -C /tmp/aws-cfn-bootstrap/ --strip-components=1
+  command: tar xvfz /tmp/aws-cfn-bootstrap-latest.tar.gz -C /tmp/aws-cfn-bootstrap/ --strip-components=1
 
 - name: Execute script
   command: python /tmp/aws-cfn-bootstrap/setup.py install 
