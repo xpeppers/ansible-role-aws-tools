@@ -1,13 +1,27 @@
 ---
 
 - name: Install prerequisites from apt when Debian based
-  apt: name=python-pip state=latest
+  apt: name={{item}} state=latest
+  with_items:
+    - python-pip
+    - unzip
   when: ansible_os_family == "Debian"
 
-# Not required on Amazon Linux AMIs
-- name: Install from yum when Red Hat based
-  yum: name={{item}} state=latest
+#RedHat epel
+- name: Download latest epel
+  get_url: url=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm dest=/tmp
+  when: ansible_distribution == 'RedHat'
+
+- name: Install epel
+  yum: name=/tmp/epel-release-latest-7.noarch.rpm
+  #command: rpm -Uvh /tmp/epel-release-latest-7*.rpm || echo continue
+  when: ansible_distribution == 'RedHat'
+  ignore_errors: yes
+
+- name: Install from yum
+  yum: name={{item}} state=latest update_cache=yes
   with_items:
     - epel-release
     - python-pip
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+    - unzip
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'

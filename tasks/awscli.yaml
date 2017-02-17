@@ -6,4 +6,4 @@
 
 - name: Install from yum when Red Hat based
   pip: name=awscli
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
