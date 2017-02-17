@@ -5,3 +5,4 @@
 - include: aws-cloudwatch-logs-agent.yaml
 - include: awscli-monitor-scripts.yaml
 - include: codedeploy-agent.yaml
+- include: cfn-bootstrap.yaml

@@ -1,0 +1,15 @@
+---
+
+- name: Download cfn-bootstrap packet
+  get_url: url=https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz dest=/tmp
+
+- name: Create folder for cfn-bootstrap
+  file: state=directory path=/tmp/aws-cfn-bootstrap
+
+- name: Unarchive cfn-bootstrap archive
+  command: gtar xvf /tmp/aws-cfn-bootstrap-latest.tar.gz -C /tmp/aws-cfn-bootstrap/ --strip-components=1
+
+- name: Execute script
+  command: python /tmp/aws-cfn-bootstrap/setup.py install 
+  args:
+    chdir: /tmp/aws-cfn-bootstrap
