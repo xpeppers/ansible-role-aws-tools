@@ -1,8 +1,20 @@
 ---
 
+- include_vars: global.yaml
+
 - include: requirements.yaml
+
 - include: awscli.yaml
+  when: install_awscli
+
 - include: aws-cloudwatch-logs-agent.yaml
+  when: install_logs_agent
+
 - include: awscli-monitor-scripts.yaml
+  when: install_custom_metrics
+
 - include: codedeploy-agent.yaml
+  when: install_codedeploy
+
 - include: cfn-bootstrap.yaml
+  when: install_cfn_bootstrap
