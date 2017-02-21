@@ -10,12 +10,12 @@
 #RedHat epel
 - name: Download latest epel
   get_url: url=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm dest=/tmp
-  when: ansible_distribution == 'RedHat'
+  when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS'
 
 - name: Install epel
   yum: name=/tmp/epel-release-latest-7.noarch.rpm
   #command: rpm -Uvh /tmp/epel-release-latest-7*.rpm || echo continue
-  when: ansible_distribution == 'RedHat'
+  when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS'
   ignore_errors: yes
 
 - name: Install from yum
