@@ -34,15 +34,15 @@ Cloudformation yaml format:
 ```yaml
 - PolicyName: metrics
   PolicyDocument:
-  Version: '2012-10-17'
-  Statement:
-  - Effect: Allow
-    Action:
-    - cloudwatch:PutMetricData
-    - cloudwatch:GetMetricStatistics
-    - cloudwatch:ListMetrics
-    Resource:
-    - '*'
+      Version: '2012-10-17'
+      Statement:
+      - Effect: Allow
+        Action:
+        - cloudwatch:PutMetricData
+        - cloudwatch:GetMetricStatistics
+        - cloudwatch:ListMetrics
+        Resource:
+        - '*'
 ```
 
 JSON Format:
@@ -70,16 +70,16 @@ Cloudformation yaml format:
 ```yaml
 - PolicyName: logs
   PolicyDocument:
-  Version: '2012-10-17'
-  Statement:
-  - Effect: Allow
-    Action:
-    - logs:CreateLogGroup
-    - logs:CreateLogStream
-    - logs:PutLogEvents
-    - logs:DescribeLogStreams
-    Resource:
-    - arn:aws:logs:*:*:*
+      Version: '2012-10-17'
+      Statement:
+      - Effect: Allow
+        Action:
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+        - logs:DescribeLogStreams
+        Resource:
+        - arn:aws:logs:*:*:*
 ```
 
 JSON format
