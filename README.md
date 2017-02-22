@@ -106,14 +106,14 @@ JSON format
 ```yaml
 - PolicyName: s3-codedeploy
   PolicyDocument:
-  Version: '2012-10-17'
-  Statement:
-  - Effect: Allow
-    Action:
-    - s3:Get*
-    - s3:List*
-    Resource:
-    - arn:aws:s3:::bucket-name-for-codedeploy-archive/*
+      Version: '2012-10-17'
+      Statement:
+      - Effect: Allow
+        Action:
+        - s3:Get*
+        - s3:List*
+        Resource:
+        - arn:aws:s3:::bucket-name-for-codedeploy-archive/*
 ```
 
 JSON Format:
