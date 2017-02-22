@@ -5,7 +5,14 @@
   with_items:
     - ruby2.0
     - wget
-  when: ansible_os_family == "Debian"
+  when: ansible_os_family == "Debian" and ansible_distribution_version == 14.04
+
+- name: Install prerequisites for codedeploy agent
+  apt: name={{item}} state=latest
+  with_items:
+    - ruby
+    - wget
+  when: ansible_os_family == "Debian" and ansible_distribution_version != 14.04
 
 - name: Install from yum when Red Hat based
   yum: name={{item}} state=latest
