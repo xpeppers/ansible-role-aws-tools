@@ -5,6 +5,7 @@
   with_items:
     - python-pip
     - unzip
+    - curl
   when: ansible_os_family == "Debian"
 
 #RedHat epel
