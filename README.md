@@ -1,5 +1,7 @@
 # Ansible Role for AWS tools
 
+[![Build Status](https://travis-ci.org/ddepaoli3/ansible-role-aws-tools.svg?branch=master)](https://travis-ci.org/ddepaoli3/ansible-role-aws-tools)
+
 # Select tools to install
 In vars file _global.yaml_ there are the variables to select which components install or not.
 Override them with value false to not install that role. By default all variables are true and all components are installed
