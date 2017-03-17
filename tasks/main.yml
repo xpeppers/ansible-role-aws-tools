@@ -1,7 +1,5 @@
 ---
 
-- include_vars: global.yaml
-
 - include: requirements.yaml
 
 - include: awscli.yaml

@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/ddepaoli3/ansible-role-aws-tools.svg?branch=master)](https://travis-ci.org/ddepaoli3/ansible-role-aws-tools)
 
 # Select tools to install
-In vars file _global.yaml_ there are the variables to select which components install or not.
+In vars file _main.yaml_ there are the variables to select which components install or not.
 Override them with value false to not install that role. By default all variables are true and all components are installed
 * _install\_awscli_: for the awscli
 * _install\_logs_agent_: for cloudwatch agent
