@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: all
+
   roles:
-    - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
+    - role_under_test
