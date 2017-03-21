@@ -11,7 +11,7 @@
   file: path=/var/awslogs/etc state=directory
 
 - name: Create aws logs agent config
-  template: src=templates/aws-logs-agent.conf.j2 dest=/var/awslogs/etc/aws.conf
+  template: src=templates/aws-logs-agent.conf.j2 dest=/tmp/awslogs.conf
 
 - name: Execute installer
-  command: python /tmp/awslogs-agent-setup.py --non-interactive -c /var/awslogs/etc/aws.conf --region={{ aws_region.stdout[:-1] }}
+  command: python /tmp/awslogs-agent-setup.py --non-interactive -c /tmp/awslogs.conf --region={{ aws_region.stdout[:-1] }}
