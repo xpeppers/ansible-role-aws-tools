@@ -27,6 +27,17 @@ For example for an ubuntu instance:
     - ansible-role-aws-tools
 ```
 
+# Cloudwatch logs
+Define a _logs_ variable in your task to include and format logs. For example:
+
+```
+  vars:
+    - logs:
+      - file: /var/log/tomcat8/spring.log
+        format: "%Y-%m-%d %H:%M:%S.%f"
+        group_name: spring
+```
+
 # Roles
 To ensure that the metrics, log, codedeploy agent work correctly assign to EC2 instance a role with the following permssion:
 
