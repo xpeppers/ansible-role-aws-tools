@@ -5,3 +5,4 @@ install_logs_agent: true
 install_custom_metrics: true
 install_codedeploy: true
 install_cfn_bootstrap: true
+logs: ''
