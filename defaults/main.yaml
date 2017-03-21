@@ -6,3 +6,4 @@ install_custom_metrics: true
 install_codedeploy: true
 install_cfn_bootstrap: true
 logs: ''
+aws_env: true
