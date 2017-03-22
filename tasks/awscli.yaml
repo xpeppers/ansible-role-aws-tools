@@ -1,9 +1,9 @@
 ---
 
-- name: Install from apt when Debian based
+- name: Install awscli from pip when Debian based
   apt: name=awscli state=latest
   when: ansible_os_family == "Debian"
 
-- name: Install from yum when Red Hat based
+- name: Install awscli from pip when Centos or RedHat based
   pip: name=awscli
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'

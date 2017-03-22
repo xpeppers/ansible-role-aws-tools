@@ -16,7 +16,7 @@
     - perl-Digest-SHA
   when: ansible_distribution == 'RedHat'
 
-- name: Install from yum when Red Hat based
+- name: Install from yum when Centos based
   yum: name={{ item }} state=latest
   with_items:
     - perl-Switch
