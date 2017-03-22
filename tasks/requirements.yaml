@@ -25,4 +25,5 @@
     - epel-release
     - python-pip
     - unzip
+    - cronie
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
