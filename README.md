@@ -1,7 +1,9 @@
 # Ansible Role for AWS tools
 
+[![Build Status](https://travis-ci.org/ddepaoli3/ansible-role-aws-tools.svg?branch=master)](https://travis-ci.org/ddepaoli3/ansible-role-aws-tools)
+
 # Select tools to install
-In vars file _global.yaml_ there are the variables to select which components install or not.
+In vars file _main.yaml_ there are the variables to select which components install or not.
 Override them with value false to not install that role. By default all variables are true and all components are installed
 * _install\_awscli_: for the awscli
 * _install\_logs_agent_: for cloudwatch agent
@@ -23,6 +25,17 @@ For example for an ubuntu instance:
 
   roles:
     - ansible-role-aws-tools
+```
+
+# Cloudwatch logs
+Define a _logs_ variable in your task to include and format logs. For example:
+
+```
+  vars:
+    - logs:
+      - file: /var/log/tomcat8/spring.log
+        format: "%Y-%m-%d %H:%M:%S.%f"
+        group_name: spring
 ```
 
 # Roles
