@@ -3,7 +3,6 @@
 - name: Install from apt when debian based
   apt: name={{ item }} state=latest
   with_items:
-    - unzip
     - libwww-perl
     - libdatetime-perl
   when: ansible_os_family == "Debian"
@@ -11,14 +10,21 @@
 - name: Install from yum when Red Hat based
   yum: name={{ item }} state=latest
   with_items:
-    - zip
-    - unzip
+    - perl-DateTime
+    - perl-Sys-Syslog
+    - perl-LWP-Protocol-https
+    - perl-Digest-SHA
+  when: ansible_distribution == 'RedHat'
+
+- name: Install from yum when Red Hat based
+  yum: name={{ item }} state=latest
+  with_items:
     - perl-Switch
     - perl-DateTime
     - perl-Sys-Syslog
     - perl-LWP-Protocol-https
     - perl-Digest-SHA
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_distribution == 'CentOS'
 
 - name: Install from yum when Amazon Linux
   yum: name={{ item }} state=latest
