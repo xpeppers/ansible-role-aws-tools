@@ -14,7 +14,10 @@
   when: not aws_env
 
 - name: Create directory for config
-  file: path=/var/awslogs/etc state=directory
+  file: path={{ item }} state=directory
+  with_items:
+    - /var/awslogs/etc
+    - /etc/cron.d
 
 - name: Create aws logs agent config
   template: src=templates/aws-logs-agent.conf.j2 dest=/tmp/awslogs.conf
