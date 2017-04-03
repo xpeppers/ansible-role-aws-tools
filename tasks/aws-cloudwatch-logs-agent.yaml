@@ -8,11 +8,6 @@
   register: aws_region
   when: aws_env
 
-- name: Get AWS region
-  command: echo eu-west-1a
-  register: aws_region
-  when: not aws_env
-
 - name: Create directory for config
   file: path={{ item }} state=directory
   with_items:
@@ -21,5 +16,10 @@
 - name: Create aws logs agent config
   template: src=templates/aws-logs-agent.conf.j2 dest=/tmp/awslogs.conf
 
-- name: Execute installer
+- name: Execute installer in aws env
   command: python /tmp/awslogs-agent-setup.py --non-interactive -c /tmp/awslogs.conf --region={{ aws_region.stdout[:-1] }}
+  when: aws_env
+
+- name: Execute installer in test env
+  command: python /tmp/awslogs-agent-setup.py --non-interactive -c /tmp/awslogs.conf --region=eu-west-1
+  when: not aws_env
