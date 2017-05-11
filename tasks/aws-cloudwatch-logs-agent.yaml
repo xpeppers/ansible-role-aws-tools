@@ -5,7 +5,7 @@
 
 - name: Get AWS region
   command: curl http://169.254.169.254/latest/meta-data/placement/availability-zone
-  register: aws_region
+  register: aws_region_role_aws_tools
   when: aws_env
 
 - name: Create directory for config
@@ -17,7 +17,7 @@
   template: src=templates/aws-logs-agent.conf.j2 dest=/tmp/awslogs.conf
 
 - name: Execute installer in aws env
-  command: python /tmp/awslogs-agent-setup.py --non-interactive -c /tmp/awslogs.conf --region={{ aws_region.stdout[:-1] }}
+  command: python /tmp/awslogs-agent-setup.py --non-interactive -c /tmp/awslogs.conf --region={{ aws_region_role_aws_tools.stdout[:-1] }}
   when: aws_env
 
 - name: Execute installer in test env
