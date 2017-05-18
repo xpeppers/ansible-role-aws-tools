@@ -7,3 +7,5 @@ install_codedeploy: true
 install_cfn_bootstrap: true
 logs: ''
 aws_env: true
+
+instanceidfile: /var/tmp/aws-mon/instance-id
