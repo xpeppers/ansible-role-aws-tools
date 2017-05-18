@@ -41,13 +41,15 @@
 - name: Unarchive script archive
   unarchive: src=/tmp/CloudWatchMonitoringScripts-1.2.1.zip dest=/usr/bin copy=no
 
-- name: Change aws-mon dir to temporary one
-  lineinfile: dest=/usr/bin/aws-scripts-mon/CloudWatchClient.pm
-               state=present
-               regexp="our \$meta_data_loc = '/var/tmp/aws-mon';"
-               line="our $meta_data_loc = '/tmp/aws-mon';"
-               backup=yes
-               backrefs=yes
+- name: Install script to remove instance-id at startup
+  template: 
+    src: templates/remove-instance-id.sh.template
+    dest: /etc/init.d/remove-instance-id
+    owner: root
+    mode: 0744
+
+- name: Install remove-instance-id at startup
+  service: name=remove-instance-id enabled=yes
 
 - name: Get mounted disk
   shell: lsblk|grep '/'|awk '{ print $7 }'| while read line; do echo -n ' --disk-path='$line; done
