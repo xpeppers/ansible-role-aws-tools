@@ -120,6 +120,8 @@ state_file = /var/awslogs/state/agent-state
 [{{ log.file }}]
 datetime_format = {{ log.format }}
 file = {{ log.file }}
+buffer_duration = 5000
 log_group_name = {{ log.group_name }}
 log_stream_name = {instance_id}
+encoding = utf-8
 {% endfor %}
