@@ -1,0 +1,4 @@
+---
+
+- name: Install aws-ec2-assign-elastic-ip from pip
+  pip: name=aws-ec2-assign-elastic-ip
