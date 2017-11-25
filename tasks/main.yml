@@ -16,3 +16,6 @@
 
 - include: cfn-bootstrap.yaml
   when: install_cfn_bootstrap
+
+- include: aws-ec2-assign-elastic-ip.yaml
+  when: ec2_assign_elastic_ip

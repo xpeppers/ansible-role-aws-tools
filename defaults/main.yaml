@@ -5,6 +5,7 @@ install_logs_agent: true
 install_custom_metrics: true
 install_codedeploy: true
 install_cfn_bootstrap: true
+ec2_assign_elastic_ip: true
 logs: ''
 aws_env: true
 
