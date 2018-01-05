@@ -55,6 +55,16 @@
   shell: lsblk|grep '/'|awk '{ print $7 }'| while read line; do echo -n ' --disk-path='$line; done
   register: mounted_disks
 
+- name: Set option for autoscaling group when true
+  set_fact:
+    ec2_in_autoscaling: "--auto-scaling"
+  when: autoscaling
+
+- name: Set option for autoscaling group when false
+  set_fact:
+    ec2_in_autoscaling: ""
+  when: not autoscaling
+
 #Report memory and disk space utilization to CloudWatch every 1 minutes
 - name: Install script on crontab
-  cron: name="Send metrics" minute="*/1" job="/usr/bin/aws-scripts-mon/mon-put-instance-data.pl --mem-util --disk-space-util {{mounted_disks.stdout}} --from-cron"
+  cron: name="Send metrics" minute="*/1" job="/usr/bin/aws-scripts-mon/mon-put-instance-data.pl --mem-util --disk-space-util {{mounted_disks.stdout}} {{ec2_in_autoscaling}} --from-cron"

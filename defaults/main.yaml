@@ -8,5 +8,6 @@ install_cfn_bootstrap: true
 ec2_assign_elastic_ip: true
 logs: ''
 aws_env: true
+autoscaling: true
 
 instanceidfile: /var/tmp/aws-mon/instance-id

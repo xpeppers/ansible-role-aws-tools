@@ -11,6 +11,7 @@ Override them with value false to not install that role. By default all variable
 * _install\_codedeploy_: for codedeploy agent
 * _install\_cfn_bootstrap_: for cfn-bootstrap components
 * _ec2\_assign\_elastic\_ip_: for [aws-ec2-assign-elastic-ip](https://github.com/skymill/aws-ec2-assign-elastic-ip) tool
+* _autoscaling_: if EC2 instance is in autoscaling group. This needs the [DescribeTags permission](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTags.html)
 
 # How to use it manually
 Add this repository in the _roles_ folder of your playbook and use it as normale role.
@@ -55,6 +56,7 @@ Cloudformation yaml format:
         - cloudwatch:PutMetricData
         - cloudwatch:GetMetricStatistics
         - cloudwatch:ListMetrics
+        - ec2:DescribeTags
         Resource:
         - '*'
 ```
