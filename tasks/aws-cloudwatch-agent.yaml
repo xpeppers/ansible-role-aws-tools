@@ -18,4 +18,4 @@
 
 - name: Install AWS Agent config
   template: src=templates/amazon-cloudwatch-agent.json.j2 dest=/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
-  notify: reload cloudwatch agent
+  notify: restart cloudwatch agent
