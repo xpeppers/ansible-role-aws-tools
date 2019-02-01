@@ -1,0 +1,21 @@
+---
+
+- name: Create download dir
+  file:
+    path: /tmp/cwagent
+    state: directory
+
+- name: Download latest CW Agent
+  unarchive:
+    src: https://s3.amazonaws.com/amazoncloudwatch-agent/linux/amd64/latest/AmazonCloudWatchAgent.zip
+    dest: /tmp/cwagent
+    remote_src: yes
+
+- name: Install latest CW agent
+  command: /tmp/cwagent/install.sh
+  args:
+    chdir: /tmp/cwagent
+
+- name: Install AWS Agent config
+  template: src=templates/amazon-cloudwatch-agent.json.j2 dest=/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+  notify: reload cloudwatch agent
