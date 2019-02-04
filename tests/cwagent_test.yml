@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Test Cloudwatch Agent configuration with only log files
+  hosts: all
   remote_user: ubuntu
   become: yes
 
@@ -14,6 +15,7 @@
     - include_role:
         name: ansible-aws-tools-role
       vars:
+        autoscaling: false
         install_awscli: true
         install_cloudwatch_agent: true
         install_custom_metrics: false
@@ -21,3 +23,42 @@
         install_cfn_bootstrap: false
         ec2_assign_elastic_ip: false
 
+- name: Test Cloudwatch Agent configuration with only custom metrics
+  hosts: all
+  remote_user: ubuntu
+  become: yes
+  vars:
+    - aws_env: false
+  tasks:
+    - include_role:
+        name: ansible-aws-tools-role
+      vars:
+        autoscaling: false
+        install_awscli: true
+        install_cloudwatch_agent: true
+        install_custom_metrics: true
+        install_codedeploy: false
+        install_cfn_bootstrap: false
+        ec2_assign_elastic_ip: false
+
+- name: Test Cloudwatch Agent configuration with both log files and  custom metrics
+  hosts: all
+  remote_user: ubuntu
+  become: yes
+  vars:
+    - aws_env: false
+    - logs:
+        - file: /var/log/auth.log
+          group_name: auth.log
+          format: "%H: %M: %S%y%b%-d"
+  tasks:
+    - include_role:
+        name: ansible-aws-tools-role
+      vars:
+        autoscaling: false
+        install_awscli: true
+        install_cloudwatch_agent: true
+        install_custom_metrics: true
+        install_codedeploy: false
+        install_cfn_bootstrap: false
+        ec2_assign_elastic_ip: false
