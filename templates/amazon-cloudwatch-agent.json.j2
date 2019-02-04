@@ -23,11 +23,17 @@
   "metrics": {
     "append_dimensions": {
       "InstanceId": "${aws:InstanceId}"{% if autoscaling %},
+    {% for dimension in additional_append_dimensions %}
+      {{ dimension }}
+    {% endfor %}
       "AutoScalingGroupName": "${aws:AutoScalingGroupName}"
       {% endif %}
     },
   "aggregation_dimensions" : [
      ["InstanceId"],
+    {% for dimension in additional_aggregation_dimensions %}
+      {{ dimension }}
+    {% endfor %}
      ["InstanceId", "path"]{% if autoscaling %},
      ["AutoScalingGroupName"]
     {% endif %}
