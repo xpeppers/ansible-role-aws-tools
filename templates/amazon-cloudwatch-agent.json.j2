@@ -1,20 +1,60 @@
 {
 {% if logs is defined and logs|length %}
-	"logs": {
-		"logs_collected": {
-			"files": {
-				"collect_list": [
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
         {% for log in logs %}
           {
-						"file_path": "{{ log.file }}",
+            "file_path": "{{ log.file }}",
             "log_group_name": "{{ log.group_name }}",
             "log_stream_name": "{instance_id}",
             "timestamp_format": "{{ log.format }}"
           }{% if not loop.last %},{% endif %}
         {% endfor %}
-				]
-			}
-		}
-	}
+        ]
+      }
+    }
+  }
+{% endif %}
+{% if install_custom_metrics %}
+{% if logs is defined and logs|length %},{% endif %}
+
+  "metrics": {
+    "append_dimensions": {
+      "InstanceId": "${aws:InstanceId}"{% if autoscaling %},
+      "AutoScalingGroupName": "${aws:AutoScalingGroupName}"
+      {% endif %}
+    },
+  "aggregation_dimensions" : [
+     ["InstanceId"],
+     ["InstanceId", "path"]{% if autoscaling %},
+     ["AutoScalingGroupName"]
+    {% endif %}
+   ],
+  "metrics_collected": {
+
+    {% if  custom_metrics['disk']['enabled'] %}
+{% include custom_metrics['disk']['template'] %}
+    {% endif %}
+
+    {% if  custom_metrics['diskio']['enabled'] %}
+{% include custom_metrics['diskio']['template'] %}
+    {% endif %}
+
+    {% if  custom_metrics['mem']['enabled'] %}
+{% include custom_metrics['mem']['template'] %}
+    {% endif %}
+
+    {% if  custom_metrics['net']['enabled'] %}
+{% include custom_metrics['net']['template'] %}
+    {% endif %}
+
+    {% if  custom_metrics['cpu']['enabled'] %}
+{% include custom_metrics['cpu']['template'] %}
+    {% endif %}
+
+  }
+}
 {% endif %}
 }

@@ -16,6 +16,10 @@
   args:
     chdir: /tmp/cwagent
 
+- debug:
+    var: custom_metrics
+    verbosity: 2
+
 - name: Install AWS Agent config
   template: src=templates/amazon-cloudwatch-agent.json.j2 dest=/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
   notify: restart cloudwatch agent

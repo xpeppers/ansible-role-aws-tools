@@ -1,0 +1,10 @@
+		"diskio": {
+       "measurement": [
+      	 {"name": "iops_in_progress", "rename": "IOPS" },
+      	 {"name": "reads", "rename": "DiskReads"       },
+      	 {"name": "writes", "rename": "DiskWrites"     },
+      	 {"name": "io_time", "rename": "DiskIOTime"    }
+       ],
+       "metrics_collection_interval": {{ custom_metrics['diskio']['interval'] }},
+       "resources": [ "*" ]
+    },
