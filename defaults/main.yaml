@@ -1,7 +1,7 @@
 ---
 
 install_awscli: true
-install_logs_agent: true
+install_cloudwatch_agent: true
 install_custom_metrics: true
 install_codedeploy: true
 install_cfn_bootstrap: true
@@ -11,3 +11,11 @@ aws_env: true
 autoscaling: true
 
 instanceidfile: /var/tmp/aws-mon/instance-id
+additional_append_dimensions: []
+additional_aggregation_dimensions: []
+custom_metrics:
+  "cpu": { "enabled": true, "interval": 60, "template": "cpu_custom_metrics.j2" }
+  "disk": { "enabled": true, "interval": 60, "template": "disk_custom_metrics.j2"  }
+  "diskio": { "enabled": true, "interval": 60, "template": "diskio_custom_metrics.j2"  }
+  "mem": { "enabled": true, "interval": 60, "template": "mem_custom_metrics.j2"  }
+  "net": { "enabled": true, "interval": 60, "template": "net_custom_metrics.j2"  }
