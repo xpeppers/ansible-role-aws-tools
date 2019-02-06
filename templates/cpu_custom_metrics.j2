@@ -1,0 +1,11 @@
+		"cpu": {
+       "measurement": [ 
+        { "name": "cpu_usage_active", "rename": "CPUUtilization" },
+        { "name": "cpu_usage_idle"   },
+        { "name": "cpu_usage_iowait" },
+        { "name": "cpu_usage_user"   },
+        { "name": "cpu_usage_system" }
+       ],
+       "metrics_collection_interval": {{ custom_metrics['cpu']['interval'] }},
+     	 "resources": [ "*" ]
+    	}

@@ -6,8 +6,8 @@
 In vars file _main.yaml_ there are the variables to select which components install or not.
 Override them with value false to not install that role. By default all variables are true and all components are installed
 * _install\_awscli_: for the awscli
-* _install\_logs_agent_: for cloudwatch agent
-* _install\_custom_metrics_: for custom metrics script
+* _install\_cloudwatch\_agent_: for cloudwatch agent
+* _install\_custom_metrics_: for custom metrics in cloudwatch agent
 * _install\_codedeploy_: for codedeploy agent
 * _install\_cfn_bootstrap_: for cfn-bootstrap components
 * _ec2\_assign\_elastic\_ip_: for [aws-ec2-assign-elastic-ip](https://github.com/skymill/aws-ec2-assign-elastic-ip) tool
@@ -38,6 +38,9 @@ Define a _logs_ variable in your task to include and format logs. For example:
       - file: /var/log/tomcat8/spring.log
         format: "%Y-%m-%d %H:%M:%S.%f"
         group_name: spring
+      - file: /var/log/auth.log
+        group_name: auth.log
+        format: "%H: %M: %S%y%b%-d"
 ```
 
 # Roles

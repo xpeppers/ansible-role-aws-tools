@@ -5,11 +5,8 @@
 - include: awscli.yaml
   when: install_awscli
 
-- include: aws-cloudwatch-logs-agent.yaml
-  when: install_logs_agent
-
-- include: awscli-monitor-scripts.yaml
-  when: install_custom_metrics
+- include: aws-cloudwatch-agent.yaml
+  when: install_cloudwatch_agent
 
 - include: codedeploy-agent.yaml
   when: install_codedeploy
