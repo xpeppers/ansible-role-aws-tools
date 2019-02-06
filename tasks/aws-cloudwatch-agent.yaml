@@ -23,3 +23,9 @@
 - name: Install AWS Agent config
   template: src=templates/amazon-cloudwatch-agent.json.j2 dest=/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
   notify: restart cloudwatch agent
+
+- name: Enable service amazon-cloudwatch-agent and ensure it is not masked
+  systemd:
+    name: amazon-cloudwatch-agent
+    enabled: yes
+    masked: no
