@@ -15,6 +15,7 @@
   command: /tmp/cwagent/install.sh
   args:
     chdir: /tmp/cwagent
+    creates: /etc/systemd/system/amazon-cloudwatch-agent.service
 
 - debug:
     var: custom_metrics
