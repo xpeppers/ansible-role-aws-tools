@@ -8,21 +8,30 @@
     - curl
   when: ansible_os_family == "Debian"
 
-#RedHat epel
-- name: Download latest epel
-  get_url: url=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm dest=/tmp
-  when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS'
+# Amazon Linux 2 basic packages
+- name: Install from yum
+  yum:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: yes
+  vars:
+    packages:
+      - libselinux-python
+      - python2-pip
+      - unzip
+      - cronie
+  when: ansible_distribution == 'Amazon'
 
+# EPEL
 - name: Install epel
-  yum: name=/tmp/epel-release-latest-7.noarch.rpm
-  #command: rpm -Uvh /tmp/epel-release-latest-7*.rpm || echo continue
-  when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS'
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS' or ansible_distribution == 'Amazon'
   ignore_errors: yes
 
+#RedHat/Centos basic packages
 - name: Install from yum
   yum: name={{item}} state=latest update_cache=yes
   with_items:
-    - epel-release
     - python-pip
     - unzip
     - cronie
