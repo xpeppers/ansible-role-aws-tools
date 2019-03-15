@@ -1,5 +1,8 @@
 ---
 
+# Gather EC2 metadata facts
+- ec2_metadata_facts:
+
 - include: requirements.yaml
 
 - include: awscli.yaml
