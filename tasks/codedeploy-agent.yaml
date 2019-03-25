@@ -21,9 +21,11 @@
     - wget
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Amazon'
 
-# On eu-west-1
 - name: Download installer
-  get_url: url=https://aws-codedeploy-eu-west-1.s3.amazonaws.com/latest/install dest=/tmp/install-codedeploy-agent mode=o+x
+  get_url:
+    url: "https://aws-codedeploy-{{ ansible_ec2_placement_region }}.s3.amazonaws.com/latest/install"
+    dest: /tmp/install-codedeploy-agent
+    mode: o+x
 
 - name: Execute installer
   command: /tmp/install-codedeploy-agent auto
