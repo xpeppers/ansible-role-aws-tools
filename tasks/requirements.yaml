@@ -1,11 +1,12 @@
 ---
 
 - name: Install prerequisites from apt when Debian based
-  apt: name={{item}} state=latest update_cache=yes
-  with_items:
-    - python-pip
-    - unzip
-    - curl
+  apt: name={{ packages }} state=latest update_cache=yes
+  vars:
+    packages:
+      - python-pip
+      - unzip
+      - curl
   when: ansible_os_family == "Debian"
 
 # Amazon Linux 2 basic packages
