@@ -22,7 +22,7 @@
   changed_when: False
 
 - name: Install from yum when Red Hat based
-  yum: name={{ packages }} state=latest
+  yum: name={{ packages }} state=latest lock_timeout=300
   vars:
     packages:
       - ruby
