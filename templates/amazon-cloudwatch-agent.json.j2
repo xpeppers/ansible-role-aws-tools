@@ -8,7 +8,7 @@
           {
             "file_path": "{{ log.file }}",
             "log_group_name": "{{ log.group_name }}",
-            "log_stream_name": "{instance_id}",
+            "log_stream_name": "{{ log.stream_name }}",
             "timestamp_format": "{{ log.format }}"
           }{% if not loop.last %},{% endif %}
         {% endfor %}

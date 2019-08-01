@@ -38,9 +38,11 @@ Define a _logs_ variable in your task to include and format logs. For example:
       - file: /var/log/tomcat8/spring.log
         format: "%Y-%m-%d %H:%M:%S.%f"
         group_name: spring
+        stream_name: {instance_id}
       - file: /var/log/auth.log
         group_name: auth.log
         format: "%H: %M: %S%y%b%-d"
+        stream_name: {instance_id}
 ```
 
 # Roles
