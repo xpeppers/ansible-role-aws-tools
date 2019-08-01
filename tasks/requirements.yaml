@@ -1,19 +1,21 @@
 ---
 
 - name: Install prerequisites from apt when Debian based
-  apt: name={{item}} state=latest update_cache=yes
-  with_items:
-    - python-pip
-    - unzip
-    - curl
+  apt: name={{ packages }} state=latest update_cache=yes
+  vars:
+    packages:
+      - python-pip
+      - unzip
+      - curl
   when: ansible_os_family == "Debian"
 
 # Amazon Linux 2 basic packages
-- name: Install from yum
+- name: Install from yum if AMZ Linux
   yum:
     name: "{{ packages }}"
     state: latest
     update_cache: yes
+    lock_timeout: 300
   vars:
     packages:
       - libselinux-python
@@ -24,17 +26,18 @@
 
 # EPEL
 - name: Install epel
-  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm lock_timeout=300
   when: ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS' or ansible_distribution == 'Amazon'
   ignore_errors: yes
 
 #RedHat/Centos basic packages
-- name: Install from yum
-  yum: name={{item}} state=latest update_cache=yes
-  with_items:
-    - python-pip
-    - unzip
-    - cronie
+- name: Install from yum if Centos or RedHat
+  yum: name={{packages}} state=latest update_cache=yes lock_timeout=300
+  vars:
+    packages:
+      - python-pip
+      - unzip
+      - cronie
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
 
 - name: Upgrade pip to latest version
